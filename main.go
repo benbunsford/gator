@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
-	"log"
-
+	"errors"
 	"github.com/benbunsford/gator/internal/config"
+	"log"
+	"os"
 )
 
 func main() {
@@ -13,12 +13,28 @@ func main() {
 		log.Fatal(err)
 	}
 
-	cfg.SetUser("ben")
+	currentState := state{
+		cfg: &cfg,
+	}
 
-	cfg, err = config.Read()
+	cmds := commands{
+		cmdMap: map[string]func(*state, command) error{},
+	}
+
+	cmds.register("login", handlerLogin)
+
+	userArgs := os.Args
+	if len(userArgs) < 2 {
+		log.Fatal(errors.New("No command provided. Provide a command after 'gator'."))
+	}
+
+	userCmd := command{
+		name: userArgs[1],
+		args: userArgs[2:],
+	}
+
+	err = cmds.run(&currentState, userCmd)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Print(cfg)
 }
