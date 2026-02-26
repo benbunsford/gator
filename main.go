@@ -16,8 +16,12 @@ func main() {
 		log.Fatal(err)
 	}
 
+	db, err := sql.Open("postgres", cfg.DbUrl)
+	dbQueries := database.New(db)
+
 	currentState := state{
 		cfg: &cfg,
+		db:  dbQueries,
 	}
 
 	cmds := commands{
@@ -41,9 +45,5 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	db, err := sql.Open("postgres", cfg.DbUrl)
-	dbQueries := database.New(db)
-	currentState.db = dbQueries
 
 }
