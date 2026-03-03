@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type command struct {
 	name string
 	args []string
@@ -12,7 +14,7 @@ type commands struct {
 func (c *commands) run(s *state, cmd command) error {
 	err := c.cmdMap[cmd.name](s, cmd)
 	if err != nil {
-		return err
+		return fmt.Errorf("Invalid command: %v", err)
 	}
 
 	return nil
