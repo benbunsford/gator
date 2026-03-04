@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func followHandler(s *state, cmd command) error {
+func handlerFollow(s *state, cmd command) error {
 	if len(cmd.args) < 1 {
 		return errors.New("The follow command expects a url. Example: 'follow www.nbc.com/new")
 	}
