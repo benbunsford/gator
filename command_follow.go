@@ -9,17 +9,12 @@ import (
 	"time"
 )
 
-func handlerFollow(s *state, cmd command) error {
+func handlerFollow(s *state, cmd command, user database.User) error {
 	if len(cmd.args) < 1 {
 		return errors.New("The follow command expects a url. Example: 'follow www.nbc.com/new")
 	}
 
 	feed, err := s.db.GetFeedByURL(context.Background(), cmd.args[0])
-	if err != nil {
-		return err
-	}
-
-	user, err := s.db.GetUserByName(context.Background(), s.cfg.CurrentUserName)
 	if err != nil {
 		return err
 	}

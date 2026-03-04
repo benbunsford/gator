@@ -9,14 +9,9 @@ import (
 	"time"
 )
 
-func handlerAddFeed(s *state, cmd command) error {
+func handlerAddFeed(s *state, cmd command, user database.User) error {
 	if len(cmd.args) < 2 {
 		return errors.New("The addfeed command expects a name and a url. Example: addfeed 'Big News RSS' 'https://bignews.org/new'")
-	}
-
-	user, err := s.db.GetUserByName(context.Background(), s.cfg.CurrentUserName)
-	if err != nil {
-		return err
 	}
 
 	feedData := database.CreateFeedParams{
