@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/xml"
+	"fmt"
 	"html"
 	"io"
 	"net/http"
@@ -16,6 +17,8 @@ func fetchFeed(ctx context.Context, feedURL string) (*RSSFeed, error) {
 	req.Header.Set("User-Agent", "gator")
 
 	client := http.DefaultClient
+
+	fmt.Printf("Making request to: %v\n\n", feedURL)
 
 	resp, err := client.Do(req)
 	if err != nil {
