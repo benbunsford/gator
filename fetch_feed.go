@@ -18,7 +18,7 @@ func fetchFeed(ctx context.Context, feedURL string) (*RSSFeed, error) {
 
 	client := http.DefaultClient
 
-	fmt.Printf("Making request to: %v\n\n", feedURL)
+	fmt.Printf("Making request to: %v\n", feedURL)
 
 	resp, err := client.Do(req)
 	if err != nil {

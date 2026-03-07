@@ -27,5 +27,7 @@ func handlerUnfollow(s *state, cmd command, user database.User) error {
 		return err
 	}
 
+	fmt.Printf("%v has unfollowed %v\n", user.Name, feed.Name)
+
 	return nil
 }
