@@ -71,6 +71,6 @@ go install
     - duration string example formats: 1s, 1m, 1h, 1m1s, 1h1m1s
     - don't make requests to quickly!
     - to stop aggregating, exit the program with ctrl+c
-- Browse posts from followed feeds: `gator browse <limit>'
+- Browse posts from followed feeds: `gator browse <limit>`
     - limit determines how many posts to display
     - default value if left blank is 2
